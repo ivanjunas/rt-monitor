@@ -2,7 +2,9 @@
   "name": "rt-monitor",
   "private": true,
   "dependencies": {
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "faye": "^1.1.0",
+    "epoch": "^0.8.4"
   },
   "devDependencies": {
     "chai": "^4.1.2",
