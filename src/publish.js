@@ -1,5 +1,5 @@
 
-// usage: node server [address] [port] 
+// usage: node publish [address] [port] 
 
 var faye = require('faye'),
     address = process.argv[2] || '127.0.0.1',
