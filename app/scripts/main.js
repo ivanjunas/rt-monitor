@@ -1,15 +1,51 @@
 
 console.log('RT-Monitor is running..');
 
-//------- Faye client ---------------------------------------------
-var endpoint = 'http://localhost:8000/bayeux';
+//----------- epoch  ----------------------------------
 
+// 1.) BAR chart data  	  
+var barChartData = [{
+  label: "Series 1",
+  values: [{time: new Date().getTime(),y: 0}]
+},];
+
+// BAR chart instance 
+var barChartInstance = $('#barChart').epoch({
+  type: 'time.bar',
+  axes: ['right', 'bottom', 'left'],
+  data: barChartData
+});
+
+
+// 2.) LINE chart data
+var lineChartData = [
+  {
+    label: "Line IN",
+    values: [ {time: new Date().getTime(), y: 0} ]
+  },
+  {
+    label: "Line OUT",
+    values: [ {time: new Date().getTime(), y: 0}]
+  },
+];
+
+// LINE chart instance  
+var lineChartInstance = $('#lineChart').epoch({
+  type: 'time.line',
+  axes: ['right', 'bottom', 'left'],
+  data: lineChartData
+});
+    
+
+//------- Faye client ---------------------------------------------
+
+var endpoint = 'http://localhost:8000/bayeux';
 console.log('Connecting to ' + endpoint);
 
 
 var client = new Faye.Client(endpoint);
-
-var subscription = client.subscribe('/traffic', function(message) {
+// bar subscription 
+var subscription = client.subscribe('/bar-traffic', function(message) {
   //var user = message.user;
   barChartInstance.push(message.data);
 });
@@ -29,16 +65,9 @@ client.bind('transport:up', function() {
 });
 
 
-//----------- epoch helpers (later can be cleaned) ----------------------------------
+// // line subscrition 
+// var subscriptionLine = client.subscribe('/bar-traffic', function(message) {
+//   //var user = message.user;
+//   lineChartInstance.push(message.data);
+// });
 
-////////////// real time graph generation////////////////////////////////////////	  
-var barChartData = [{
-  label: "Series 1",
-  values: [{time: new Date().getTime(),y: 0}]
-},];
-
-var barChartInstance = $('#barChart').epoch({
-  type: 'time.bar',
-  axes: ['right', 'bottom', 'left'],
-  data: barChartData
-});

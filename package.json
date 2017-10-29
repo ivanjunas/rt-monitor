@@ -43,6 +43,7 @@
     }
   },
   "dependencies": {
+    "carrier": "^0.3.0",
     "faye": "^1.2.4",
     "mime": "^2.0.3",
     "permessage-deflate": "^0.1.6"

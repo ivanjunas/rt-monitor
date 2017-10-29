@@ -25,9 +25,14 @@ setInterval(function() {
 
   // load data from the perl script 
 
-  client.publish('/traffic', {
+  client.publish('/bar-traffic', {
     user: 'ivan', 
     data: [{time: getTimeValue(), y:getRandomValue()}]
   });
+
+  // client.publish('/line-traffic', {
+  //   user: 'ivan', 
+  //   data: [{time: getTimeValue(), y:getRandomValue()}]
+  // });
 
 }, 1000);

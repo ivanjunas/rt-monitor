@@ -41,7 +41,13 @@ var server = secure
 bayeux.attach(server);
 server.listen(Number(port));
 
-bayeux.getClient().subscribe('/traffic', function(msg) {
+
+// Bar data 
+bayeux.getClient().subscribe('/bar-traffic', function(msg) {
+  console.log('[' + msg.user + ']: ' + JSON.stringify(msg.data));
+});
+// Line data 
+bayeux.getClient().subscribe('/line-traffic', function(msg) {
   console.log('[' + msg.user + ']: ' + JSON.stringify(msg.data));
 });
 
